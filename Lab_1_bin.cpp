@@ -17,7 +17,7 @@ bool searched_func(int len, int key, int arr[]) {              //function, which
     unsigned long long mid;
 
     while (l <= r) {
-        mid = (l+r)/2;
+        mid = l + (r-l)/2;
 
         if (arr[mid] == key) return true;
         if (arr[mid] > key) r = mid - 1; else l = mid + 1;
