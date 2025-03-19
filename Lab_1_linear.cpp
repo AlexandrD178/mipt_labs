@@ -23,13 +23,15 @@ float counting_time(int len) {
     int arr[len] = {};                  //creat ordered array {1, 2, ... len}
     for (int i = 0; i < len; ++i) 
         arr[i] = i;
-
-    int key = len+10;           //random value, which I want to search
         
+    int key_arr[1000000];
+    for (int i = 0; i < 1000000; ++i) {
+        key_arr[i] = rand_key(len);     //array of random keys
+    }
 
     auto begin = std::chrono::steady_clock::now();         
-    for (unsigned cnt = 100000; cnt !=0; --cnt) {
-        searched_func(len, key, arr);
+    for (int i = 0; i < 1000000; ++i) {
+        searched_func(len, key_arr[i], arr);
     }
     auto end = std::chrono::steady_clock::now();
     auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
@@ -40,7 +42,7 @@ float counting_time(int len) {
 
 
 int main() {
-    for (int len = 50100; len < 1000000; len += 10000) {
+    for (int len = 100; len < 1000000; len += 10000) {
         std::cout << len << ' ' << counting_time(len) << '\n';
     }
     std::cout << std::endl;
