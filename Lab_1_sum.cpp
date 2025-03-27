@@ -1,0 +1,50 @@
+#include <iostream>
+#include <random>
+#include <chrono>
+
+int rand_sum(int radius) {                     //function returning one random value from (0, len)
+    unsigned seed = 1001;
+    std::default_random_engine rng(seed);
+    std::uniform_int_distribution<unsigned> dstr(0, radius - 1);
+
+    return dstr(rng);
+
+}
+
+bool searched_func(int len, int sum, int arr[]) {              //function, which executive time I want to measure
+    for (int i = 0; i < len-1; ++i) {
+        for (int j = i+1; j < len-1; ++j) 
+            if ((arr[i] + arr[j] == sum) & (arr[i] != arr[j])) return true;
+    }
+
+    return false;
+}
+
+float counting_time(int len) {              
+    int arr[len] = {};                  //creat ordered array {1, 2, ... len}
+    for (int i = 0; i < len; ++i) 
+        arr[i] = i;
+        
+    int sum_arr[100000];
+    for (int i = 0; i < 100000; ++i) {
+        sum_arr[i] = rand_sum(2*len);     //array of random values
+    }
+
+    auto begin = std::chrono::steady_clock::now();         
+    for (int i = 0; i < 100000; ++i) {
+        searched_func(len, sum_arr[i], arr);
+    }
+    auto end = std::chrono::steady_clock::now();
+    auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+
+    return time_span.count();
+}
+
+
+
+int main() {
+    for (int len = 100; len < 1000000; len += 10000) {
+        std::cout << len << ' ' << counting_time(len) << '\n';
+    }
+    std::cout << std::endl;
+}
