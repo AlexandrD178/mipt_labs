@@ -26,7 +26,7 @@ float counting_time(int len) {
         arr[i] = i;
 
     auto begin = std::chrono::steady_clock::now();         
-    for (int i = 0; i < 100000; ++i) {
+    for (int i = 0; i < 50000; ++i) {
         searched_func(len, -1, arr);
     }
     auto end = std::chrono::steady_clock::now();
@@ -38,7 +38,7 @@ float counting_time(int len) {
 
 
 int main() {
-    for (int len = 100; len < 2000; len += 100) {
+    for (int len = 100; len < 1500; len += 100) {
         std::cout << len << ' ' << counting_time(len) << '\n';
     }
     std::cout << std::endl;
