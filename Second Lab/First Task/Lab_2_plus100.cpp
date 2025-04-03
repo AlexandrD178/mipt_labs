@@ -15,10 +15,9 @@ int *add_el(int *arr, unsigned long long length, int el, unsigned long long &max
         delete[] arr;
 
         return new_arr;
-    } else {
-        arr[length] = el;
-        return arr;
-    }
+    } 
+    arr[length] = el;
+    return arr;
 }
 
 int main () {
