@@ -24,14 +24,14 @@ std::ofstream out_file("Lab_2_plus100.txt");
 
     unsigned long long t = 0;
 
-    for (unsigned long long l = 10; l < 10010; ++l) {
+    for (unsigned long long l = 10; l < 100010; ++l) {
         auto begin = std::chrono::steady_clock::now();
         for (int i = 0; i < 1000; ++i) arr = add_el(arr, l, 1);
         auto end = std::chrono::steady_clock::now();
 
         auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
         t = t + time_span.count();
-        
+
         out_file << l << " " << t << std::endl;
     }
 }
