@@ -4,7 +4,7 @@
 
 int *add_el(int *arr, unsigned long long length, int el, unsigned long long max_size) {
     if (length == max_size) {
-        unsigned long long new_max_size = max_size+100;
+        unsigned long long new_max_size = max_size * 2;
         int *new_arr = new int[new_max_size];
 
         for (unsigned long long i = 0; i < length; ++i) new_arr[i] = arr[i];
@@ -22,7 +22,7 @@ int *add_el(int *arr, unsigned long long length, int el, unsigned long long max_
 }
 
 int main () {
-std::ofstream out_file("Lab_2_plus100.txt");
+std::ofstream out_file("Lab_2_X2.txt");
 
     int *arr = new int[10];
     for (int i = 0; i < 10; ++i) arr[i] = 0;
