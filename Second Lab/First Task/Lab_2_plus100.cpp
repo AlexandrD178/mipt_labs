@@ -2,7 +2,7 @@
 #include <chrono>
 #include <fstream>
 
-int *add_el(int *arr, unsigned long long length, int el, unsigned long long max_size) {
+int *add_el(int *arr, unsigned long long length, int el, unsigned long long &max_size) {
     if (length == max_size) {
         unsigned long long new_max_size = max_size+100;
         int *new_arr = new int[new_max_size];
@@ -28,10 +28,11 @@ std::ofstream out_file("Lab_2_plus100.txt");
     for (int i = 0; i < 10; ++i) arr[i] = 0;
 
     unsigned long long t = 0;
+    unsigned long long max_size = 10;
 
-    for (unsigned long long l = 10; l < 10010; ++l) {
+    for (unsigned long long l = 10; l < 100010; ++l) {
         auto begin = std::chrono::steady_clock::now();
-        for (int i = 0; i < 100000; ++i) arr = add_el(arr, l, 1, 10);
+        for (int i = 0; i < 100000; ++i) arr = add_el(arr, l, 1, max_size);
         auto end = std::chrono::steady_clock::now();
 
         auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
